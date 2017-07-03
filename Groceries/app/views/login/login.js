@@ -31,6 +31,12 @@ exports.signIn = function() {
 };
 
 exports.register = function() {
-    var topmost = frameModule.topmost();
-    topmost.navigate("views/register/register");
+    if (user.isValidEmail()) {
+        completeRegistration();
+    } else {
+        dialogsModule.alert({
+            message: "Enter a valid email address.",
+            okButtonText: "OK"
+        });
+    }
 };
