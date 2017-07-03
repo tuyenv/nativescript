@@ -12,6 +12,10 @@ var email;
 
 exports.loaded = function(args) {
     page = args.object;
+    if (page.ios) {
+        var navigationBar = frameModule.topmost().ios.controller.navigationBar;
+        navigationBar.barStyle = UIBarStyle.UIBarStyleBlack;
+    }
     page.bindingContext = user;
 };
 
@@ -39,4 +43,10 @@ exports.register = function() {
             okButtonText: "OK"
         });
     }
+};
+
+exports.delete = function(args) {
+    var item = args.view.bindingContext;
+    var index = groceryList.indexOf(item);
+    groceryList.delete(index);
 };
